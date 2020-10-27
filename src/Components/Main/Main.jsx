@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import clsx from 'clsx';
-import { Button, Grid, Container, Typography, TextField, Paper, OutlinedInput, InputAdornment, Avatar, IconButton, InputBase,Drawer } from '@material-ui/core'
+import { Button, Grid, Container, Typography, TextField, OutlinedInput, InputAdornment, Avatar, IconButton, InputBase, Drawer, Divider, Box } from '@material-ui/core'
+import { Card, CardContent, CardActions } from '@material-ui/core'
+import { LinearProgress } from '@material-ui/core'
 import { fade, makeStyles } from '@material-ui/core/styles';
-import { Search, ChevronLeft, ChevronRight, Menu, Palette ,ChevronLeftOutlined} from '@material-ui/icons';
-import { useSpring, animated } from 'react-spring';
+import { Search, ChevronLeft, ChevronRight, Menu, Palette, ChevronLeftOutlined } from '@material-ui/icons';
+import { useSpring, animated, interpolate } from 'react-spring';
 
 import MainMenu from './MainMenu';
+import '../../style/css/Main.css'
 
 const drawerWidth = 240;
 /* const theme = createMuiTheme({
@@ -30,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
         fontfamily: "Noto",
         padding: "20px",
         fontsize: "35px",
-    
+        height: "1000px"
     },
     paper: {
         padding: theme.spacing(2),
@@ -38,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
         height: "100px"
     },
     headers: {
-        fontWeight: 700
+        fontWeight: 700,
     },
     search: {
         borderRadius: theme.shape.borderRadius,
@@ -47,8 +50,6 @@ const useStyles = makeStyles((theme) => ({
             backgroundColor: fade(theme.palette.common.black, 0.25),
         },
 
-
-
     },
     searchbox: {
         willChange: "width"
@@ -56,11 +57,11 @@ const useStyles = makeStyles((theme) => ({
     drawer: {
         width: drawerWidth,
         flexShrink: 0,
-       
+
     },
     drawerPaper: {
         width: drawerWidth,
-        backgroundColor:"#303030"
+        backgroundColor: "#303030"
     },
     content: {
         flexGrow: 1,
@@ -69,8 +70,8 @@ const useStyles = makeStyles((theme) => ({
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
         }),
-        marginLeft:0
-       
+        marginLeft: 0
+
     },
 
     contentShift: {
@@ -80,6 +81,11 @@ const useStyles = makeStyles((theme) => ({
         }),
         marginLeft: drawerWidth,
     },
+    anisvg: {
+        width: "30px",
+        height: "30px",
+    }
+
 }));
 
 
@@ -87,9 +93,20 @@ const Main = () => {
 
     const classes = useStyles();
 
+    const [{ st, xy }, set] = useSpring(() => ({ st: 0, xy: [0, 0] }))
+    const interpFace = st.interpolate(o => `translate(,${105 + o / 4})`)
+    const interpBg = xy.interpolate((x, y) => `perspective(400px) rotateY(${x / 60}deg) rotateX(${-y / 60}deg) translate3d(-50%, -50%, 0)`)
+    const interpEye = interpolate([st, xy], (o, xy) => `translate(${xy[0] / 400},${xy[1] / 200 + o / 2}) scale(1)`)
+    const interpIris = interpolate([st, xy], (o, xy) => `translate(${xy[0] / 200},${xy[1] / 200 + o / 8})`)
+
+
+    const onMove = useCallback(({ clientX: x, clientY: y }) => set({ xy: [x - window.innerWidth / 2, y - window.innerHeight / 2] }), [])
+    const onScroll = useCallback(e => set({ st: e.target.scrollTop / 30 }), [])
+
     const [checked, setchecked] = useState(false);
     const [state, toggle] = useState(true)
     const [open, setopen] = useState(false);
+    const [progress, setProgress] = React.useState(10);
 
     const style = useSpring({
         width: state ? "25px" : "100%",
@@ -105,38 +122,70 @@ const Main = () => {
     }
     return (
 
-        <> 
-   
-        <div className={classes.root}>
-            <div className={classes.toolbar}>
-                 <Drawer open={open} variant="persistent" anchor="left" classes={{
-                    paper: classes.drawerPaper
-                }} style={{
-                    backgroundColor:"black"
-                }}>
-                    <div>
-                        <IconButton onClick={() => setopen(!open)} style={{
-                            float: "right"
-                        }}>
-                            <ChevronLeftOutlined style={{
-                                color:'white'
-                            }}></ChevronLeftOutlined>
-                        </IconButton>
-                    </div>
+        <>
 
-                    <MainMenu></MainMenu>
-                </Drawer> 
-                
-            </div>
+            <div className={classes.root} onMouseMove={onMove} onScroll={onScroll}>
+                <div className={classes.toolbar}>
+                    <Drawer open={open} variant="persistent" anchor="left" classes={{
+                        paper: classes.drawerPaper
+                    }} style={{
+                        backgroundColor: "black"
+                    }}>
+                        <div>
+                            <IconButton onClick={() => setopen(!open)} style={{
+                                float: "right"
+                            }}>
+                                <ChevronLeftOutlined style={{
+                                    color: 'white'
+                                }}></ChevronLeftOutlined>
+                            </IconButton>
+                        </div>
 
-            <main className={clsx(classes.content, {
-                [classes.contentShift]: open,
-            })}>
+                        <MainMenu></MainMenu>
+                    </Drawer>
 
-                                  <Grid container id="HeaderGrid">
+                </div>
+
+                <main className={clsx(classes.content, {
+                    [classes.contentShift]: open,
+                })}>
+
+                    <Grid container id="HeaderGrid">
                         <Grid item xs={9}>
+                            <Box display="flex">
+                                <Box style={{
+                                    paddingLeft:"25px",
+                                    marginTop:"20px"
+                                }}>
+                                    <animated.svg className={classes.anisvg} style={{ transform: interpBg }}>
+                                        <animated.g transform={interpFace}>
+                                            <circle fill="#000000" cx="15" cy="15" r="15" />
 
-                            <Typography className={classes.headers} variant="h4" component="h2"><img src='favicon.ico' width="26px" height="26px"></img> Rudylog</Typography>
+                                        </animated.g>
+                                        <animated.g transform={interpEye}>
+                                            <circle fill="#FFFFFF" cx="8" cy="12" r="6" />
+                                            <circle fill="#FFFFFF" cx="22" cy="12" r="6" />
+                                        </animated.g>
+                                        <animated.g transform={interpIris}>
+                                            <circle fill="#000000" cx="8" cy="12" r="2" />
+                                            <circle fill="#000000" cx="22" cy="12" r="2" />
+                                        </animated.g>
+
+                                    </animated.svg>
+
+                                </Box>
+                                <Box>
+                                    <Typography className={classes.headers} variant="h4" component="h2">
+                                     
+                                        Rudylog
+                                     
+                                 
+                                </Typography>
+                                </Box>
+                                
+                            </Box>
+
+
 
                         </Grid>
                         <Grid item xs={2} align="center" style={{
@@ -171,23 +220,52 @@ const Main = () => {
 
                         </Grid>
 
-                        <Grid item xs={12} style={{
-                            display:"flex"
-                        }}>
+
+                    </Grid>
+
+                    <Box display="flex" alignItems="center">
+                        <Box>
                             <IconButton onClick={() => setopen(!open)}>
                                 <Menu></Menu>
                             </IconButton>
-                            <div style={{
-                                alignSelf:"center",
-                                width:"100%"
-                            }}>
-                                aa
-                            </div>
-                        </Grid>
-                    </Grid> 
+                        </Box>
+                        <Box alignSelf="center" width="100%">
+                            <Typography component={'span'}>
+                                <Card style={{
+                                    paddingTop: "10px"
+                                }}>
+                                    <CardContent>
+                                        <Box display="flex" alignItems="center">
+                                            <Box width="100%" >
+                                                <LinearProgress variant="determinate" value={progress} />
+                                            </Box>
+                                            <Box minWidth={35} textAlign="center">
+                                                <Typography component={'span'} variant="body2" color="textSecondary">
+                                                    {progress}%
+                                                </Typography>
 
-            </main>
-        </div>
+                                            </Box>
+
+                                        </Box>
+
+
+                                    </CardContent>
+                                </Card>
+                            </Typography>
+                        </Box>
+
+
+                    </Box>
+                    <Divider style={{
+                        margin: "20px"
+                    }}></Divider>
+                    <Box>
+
+                    </Box>
+
+
+                </main>
+            </div>
 
 
         </>

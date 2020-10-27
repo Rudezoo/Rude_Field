@@ -62,8 +62,8 @@ const Content = styled(animated.div)`
 `
 
 const toggle = {
-  width: '1em',
-  height: '1em',
+  width: '1.5em',
+  height: '1.5em',
   marginRight: 10,
   cursor: 'pointer',
   verticalAlign: 'middle'

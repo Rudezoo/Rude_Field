@@ -29,11 +29,15 @@ const MainMenu = () => {
     return (
         <>
             <List>
-                <ListItem button>
-                 
+                <ListItem>
+
                     <Tree name="Menu" defaultOpen>
-                        <Tree name="소개" />
-                        <Tree name="subtree with children">
+                        <Tree name="Introduction">
+                            <Tree name="Rudezoo" />
+
+                            <Tree name="Rudylog" />
+                        </Tree>
+                        <Tree name="게시물">
                             <Tree name="hello" />
                             <Tree name="sub-subtree with children">
                                 <Tree name="child 1" style={{ color: '#37ceff' }} />
@@ -47,8 +51,16 @@ const MainMenu = () => {
                             </Tree>
                             <Tree name="hello" />
                         </Tree>
-                        <Tree name="world" />
-                       
+                        <Tree name="Music">
+                            <Tree name="Music1">
+                                <iframe width="150" height="100" src="https://www.youtube.com/embed/OqHzuPr4g58" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </Tree>
+                            <Tree name="Music2">
+                                <iframe width="150" height="100" src="https://www.youtube.com/embed/0IKsFBp0Izw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </Tree>
+
+                        </Tree>
+
                     </Tree>
 
                 </ListItem>
