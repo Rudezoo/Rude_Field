@@ -3,3 +3,14 @@ svg {
     transform-origin: 0% 0%;
 
   }
+#Rudy_begin:hover{
+  -webkit-transform: scale(1.2);
+  -webkit-transition: 1s;
+}
+#Rudy_text:hover{
+  -webkit-transform: scale(1.2);
+  -webkit-transition: 1s;
+}
+#root{
+  -webkit-font-smoothing: antialiased;
+}

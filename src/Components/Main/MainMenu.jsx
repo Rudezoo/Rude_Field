@@ -1,9 +1,25 @@
 import React, { memo, useState } from 'react'
-import { Drawer, List, ListItem, ListItemText } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles';
+import { Drawer, List, ListItem, ListItemText, Modal, Link, Fade } from '@material-ui/core'
 import { useSpring, a } from 'react-spring'
 import { useMeasure, usePrevious } from './helpers'
 import { Global, Frame, Title, Content, toggle } from './styles'
 import * as Icons from './icons'
+import ReactPlayer from 'react-player'
+
+const useStyles = makeStyles((theme) => ({
+    modal: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    paper: {
+        backgroundColor: theme.palette.background.paper,
+        border: '2px solid #000',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+    },
+}));
 
 const Tree = memo(({ children, name, style, defaultOpen = false }) => {
     const [isOpen, setOpen] = useState(defaultOpen)
@@ -25,15 +41,62 @@ const Tree = memo(({ children, name, style, defaultOpen = false }) => {
     )
 })
 
+
+
+
 const MainMenu = () => {
+    const classes = useStyles();
+    const PopsongList = [['Dax-Gotham', 'https://www.youtube.com/watch?v=Ve6nUvv47T4&ab_channel=Dax']];
+    const [open, setopen] = useState(false);
+    const [url, seturl] = useState('');
+
+
+    const MododalOff = () => {
+        setopen(false);
+
+    }
+
+    var poplists = PopsongList.map((v, i) => {
+        return (
+            <>
+                <Tree name={<Link component="button" variant="body2" href="#" onClick={() => { setopen(true); seturl(v[1]); }} style={{
+                    color: "white"
+                }}>{v[0]}</Link>}>
+                </Tree>
+            </>
+        );
+    })
+
     return (
         <>
+            <div>
+                <Modal
+                    open={open}
+                    className={classes.modal}
+                    onClose={MododalOff}
+                    aria-labelledby="simple-modal-title"
+                    aria-describedby="simple-modal-description"
+                >
+                    <Fade in={open}>
+                        <div className={classes.paper}>
+                            {url}
+                            <ReactPlayer url={url} playing controls></ReactPlayer>
+                        </div>
+                    </Fade>
+
+                </Modal>
+            </div>
             <List>
                 <ListItem>
 
                     <Tree name="Menu" defaultOpen>
                         <Tree name="Introduction">
-                            <Tree name="Rudezoo" />
+                            <Tree name="Rudezoo">
+                                <Tree name="Work">
+
+                                </Tree>
+                            </Tree>
+
 
                             <Tree name="Rudylog" />
                         </Tree>
@@ -52,11 +115,11 @@ const MainMenu = () => {
                             <Tree name="hello" />
                         </Tree>
                         <Tree name="Music">
-                            <Tree name="Music1">
-                                <iframe width="150" height="100" src="https://www.youtube.com/embed/OqHzuPr4g58" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <Tree name="PopSong">
+                                {poplists}
                             </Tree>
                             <Tree name="Music2">
-                                <iframe width="150" height="100" src="https://www.youtube.com/embed/0IKsFBp0Izw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
                             </Tree>
 
                         </Tree>

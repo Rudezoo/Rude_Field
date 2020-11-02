@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
         fontfamily: "Noto",
         padding: "20px",
         fontsize: "35px",
-        height: "1000px"
+        height: "1000px",
     },
     paper: {
         padding: theme.spacing(2),
@@ -120,11 +120,21 @@ const Main = () => {
     const CollapIn = () => {
         toggle(!state)
     }
+
+    const OnRudyClick=()=>{
+
+        if(document.getElementById('Rudy_begin')===null && document.getElementById('Rudy_end')){
+            document.getElementById('Rudy_end').id='Rudy_begin';
+        }else if(document.getElementById('Rudy_end')===null&&document.getElementById('Rudy_begin')){
+            document.getElementById('Rudy_begin').id='Rudy_end';
+        }
+    }
+
     return (
 
         <>
 
-            <div className={classes.root} onMouseMove={onMove} onScroll={onScroll}>
+            <div className={classes.root} onMouseMove={onMove} onScroll={onScroll} id="root">
                 <div className={classes.toolbar}>
                     <Drawer open={open} variant="persistent" anchor="left" classes={{
                         paper: classes.drawerPaper
@@ -156,7 +166,7 @@ const Main = () => {
                                 <Box style={{
                                     paddingLeft:"25px",
                                     marginTop:"20px"
-                                }}>
+                                }} id="Rudy_begin">
                                     <animated.svg className={classes.anisvg} style={{ transform: interpBg }}>
                                         <animated.g transform={interpFace}>
                                             <circle fill="#000000" cx="15" cy="15" r="15" />
@@ -174,7 +184,7 @@ const Main = () => {
                                     </animated.svg>
 
                                 </Box>
-                                <Box>
+                                <Box id="Rudy_text">
                                     <Typography className={classes.headers} variant="h4" component="h2">
                                      
                                         Rudylog
@@ -259,8 +269,12 @@ const Main = () => {
                     <Divider style={{
                         margin: "20px"
                     }}></Divider>
-                    <Box>
-
+                    <Box id="Content">
+                        <div id="blackbox" style={{
+                            background:"black",
+                            width:30,
+                            height:30
+                        }}></div>
                     </Box>
 
 
