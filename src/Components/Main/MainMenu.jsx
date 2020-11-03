@@ -2,9 +2,9 @@ import React, { memo, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import { Drawer, List, ListItem, ListItemText, Modal, Link, Fade } from '@material-ui/core'
 import { useSpring, a } from 'react-spring'
-import { useMeasure, usePrevious } from './helpers'
-import { Global, Frame, Title, Content, toggle } from './styles'
-import * as Icons from './icons'
+import { useMeasure, usePrevious } from 'Components/Main/helpers'
+import { Global, Frame, Title, Content, toggle } from 'Components/Main/styles'
+import * as Icons from 'Components/Main//icons'
 import ReactPlayer from 'react-player'
 
 const useStyles = makeStyles((theme) => ({
@@ -123,6 +123,7 @@ const MainMenu = () => {
                             </Tree>
 
                         </Tree>
+
 
                     </Tree>
 

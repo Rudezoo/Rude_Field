@@ -7,8 +7,10 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import { Search, ChevronLeft, ChevronRight, Menu, Palette, ChevronLeftOutlined } from '@material-ui/icons';
 import { useSpring, animated, interpolate } from 'react-spring';
 
-import MainMenu from './MainMenu';
-import '../../style/css/Main.css'
+import MainMenu from 'Components/Main/MainMenu';
+import 'style/css/Main.css'
+import Routers from 'Components/App/Router';
+
 
 const drawerWidth = 240;
 /* const theme = createMuiTheme({
@@ -89,7 +91,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const Main = () => {
+const Main = ({isLoggedIn}) => {
 
     const classes = useStyles();
 
@@ -121,14 +123,14 @@ const Main = () => {
         toggle(!state)
     }
 
-    const OnRudyClick=()=>{
+/*     const OnRudyClick=()=>{
 
         if(document.getElementById('Rudy_begin')===null && document.getElementById('Rudy_end')){
             document.getElementById('Rudy_end').id='Rudy_begin';
         }else if(document.getElementById('Rudy_end')===null&&document.getElementById('Rudy_begin')){
             document.getElementById('Rudy_begin').id='Rudy_end';
         }
-    }
+    } */
 
     return (
 
@@ -270,14 +272,14 @@ const Main = () => {
                         margin: "20px"
                     }}></Divider>
                     <Box id="Content">
-                        <div id="blackbox" style={{
-                            background:"black",
-                            width:30,
-                            height:30
-                        }}></div>
+                        <Routers isLoggedIn={isLoggedIn}></Routers>
                     </Box>
 
-
+                    <footer>
+                        <Box>
+                            &copy;{new Date().getFullYear()}Rude_zoo
+                        </Box>
+                    </footer>
                 </main>
             </div>
 
