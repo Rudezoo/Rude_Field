@@ -13,4 +13,40 @@ svg {
 }
 #root{
   -webkit-font-smoothing: antialiased;
+  background-image: url('../../image/back.png');
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  zoom: 100%;
+}
+
+.blur {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px); 
+  height: 100%;
+}
+#Content{
+  margin: 20px;
+}
+
+footer{
+  margin: 20px;
+}
+#icondiv{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top:50px;
+  opacity: 0.8;
+}
+#icondiv:hover{
+  -webkit-transform: scale(1.5) translate(-33%, -33%);
+  -webkit-transition: 1s;
+}
+
+#bottomheader{
+
 }

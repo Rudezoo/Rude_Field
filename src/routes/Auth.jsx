@@ -40,7 +40,7 @@ const Auth = () => {
 
     return (
         <>  
-            <div>
+{/*             <div>
                 <form onSubmit={OnSubmit}>
                 <input name="email" type="text" placeholder="Email" required value={email} onChange={OnChange}></input>
                 <input name="password" type="password" placeholder="password" required value={password} onChange={OnChange}></input>
@@ -59,7 +59,8 @@ const Auth = () => {
                 <button>Continue with Google</button>
                 <button>Continue with Github</button>
             </div>
-            {error}
+            {error} */}
+            def
         </>
     );
 }

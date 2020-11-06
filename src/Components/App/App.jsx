@@ -1,6 +1,13 @@
 import React,{useState,useEffect} from 'react';
 import Main from 'Components/Main/Main';
 import {authService} from 'Config/myFB';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+
+const darkTheme = createMuiTheme({
+  palette: {
+    type: 'dark',
+  },
+});
 
 const App = () => {
   const [init, setinit] = useState(false);
@@ -20,7 +27,10 @@ const App = () => {
   return (
 
     <>  
-      {init?  <Main isLoggedIn={isLoggedIn}></Main> : "initializing..." }
+      <ThemeProvider theme={darkTheme}> 
+         {init?  <Main isLoggedIn={isLoggedIn}></Main> : "initializing..." }
+      </ThemeProvider>
+     
      
 
                
