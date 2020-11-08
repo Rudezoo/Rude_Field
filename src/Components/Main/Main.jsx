@@ -348,7 +348,7 @@ const Main = ({ isLoggedIn }) => {
                                                         : null}
 
                                                 </Grid>
-                                                <Grid item xs={4} justify="center" style={{
+                                                <Grid container item xs={4} justify="center" style={{
                                                     display:"flex"
                                                 }}>                                                   
                                                     <Box textAlign="center" style={{
