@@ -1,1 +1,1 @@
-개인 블로그 Rudylog
+개인 블로그 Rude_Field

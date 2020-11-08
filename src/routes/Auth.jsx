@@ -60,7 +60,7 @@ const Auth = () => {
                 <button>Continue with Github</button>
             </div>
             {error} */}
-            def
+            안녕하세요 이건 고딕체입니다
         </>
     );
 }

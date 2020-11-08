@@ -1,3 +1,21 @@
+@font-face{
+  font-family: Munro;
+  font-style: normal;
+  src: url('../font/munro.ttf') format('truetype');
+}
+
+
+@font-face{
+  font-family: Bitmap;
+  font-style: normal;
+  src: url('../font/BitmapMiddleFont.ttf') format('truetype');
+}
+@font-face{
+  font-family: Gothic;
+  font-style: normal;
+  src: url('../font/GothicA1-Medium.ttf') format('truetype');
+}
+
 svg {
 
     transform-origin: 0% 0%;
@@ -11,26 +29,34 @@ svg {
   -webkit-transform: scale(1.2);
   -webkit-transition: 1s;
 }
+header{
+  font-size: 40px;
+}
 #root{
   -webkit-font-smoothing: antialiased;
-  background-image: url('../../image/back.png');
+  background-image: url('../../image/back2.png');
   background-position: bottom;
   background-repeat: no-repeat;
   background-size: cover;
   zoom: 100%;
+  font-family: Bitmap;
+ 
 }
 
 .blur {
   background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(8px); 
+  backdrop-filter: blur(3px); 
   height: 100%;
 }
 #Content{
   margin: 20px;
+  font-family: Gothic;
+
 }
 
 footer{
   margin: 20px;
+  
 }
 #icondiv{
   display: flex;
@@ -47,6 +73,69 @@ footer{
   -webkit-transition: 1s;
 }
 
-#bottomheader{
-
+.logo{
+  text-decoration: none;
+  text-align: center;
+  
 }
+.logo .logo_inside{
+    
+    margin: 0 auto;
+    margin-top: 50px;
+    text-align: center;
+    border-right: 8px solid rgba(255,255,255,.75);
+    font-size: 180%;
+    white-space: nowrap;
+    overflow: hidden;
+    transform: translateY(-50%);    
+    
+} 
+
+/* Animation */
+.anim-typewriter{
+  animation: typewriter 1.5s steps(10) 1s 1 normal both,    
+              blinkTextCursor 500ms steps(44) infinite normal;      
+}
+
+
+@keyframes typewriter{
+  from{width: 0;}
+  to{width: 100%;}
+}
+@keyframes blinkTextCursor{
+  from{border-right-color: rgba(255,255,255,.75);}
+  to{border-right-color: transparent;}
+}
+
+
+.logo:visited{
+  color: white;
+ }
+.logo:hover{
+
+  -webkit-transform: scale(1.2) ;
+  -webkit-transition: 0.5s;
+  color: gray;
+ }
+
+#header_link{
+  text-decoration: none;
+}
+#header_link:visited{
+  text-decoration: none;
+  color:white;
+}
+#header_link:hover{
+  -webkit-transition: 0.5s;
+    color:gray;
+}
+#header_link:active{
+  color:gray;
+}
+
+#header_link:focus{
+  text-decoration: none;
+  color:red;
+}
+
+

@@ -35,15 +35,15 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
-        fontfamily: "Noto",
         fontsize: "35px",
-        height: "1000px",
+        height: "auto",
+        height: "100%",
         color: "white"
     },
     paper: {
         padding: theme.spacing(2),
         textAlign: 'center',
-        height: "100px",
+        height: "100%",
     },
     headers: {
         fontWeight: 700,
@@ -79,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
             duration: theme.transitions.duration.leavingScreen,
         }),
         marginLeft: 0,
-
+        height: "100%"
     },
 
     contentShift: {
@@ -87,7 +87,7 @@ const useStyles = makeStyles((theme) => ({
             easing: theme.transitions.easing.easeOut,
             duration: theme.transitions.duration.enteringScreen,
         }),
-        marginLeft: drawerWidth,
+        marginLeft: drawerWidth,height: "100%"
     },
     anisvg: {
         width: "30px",
@@ -276,21 +276,18 @@ const Main = ({ isLoggedIn }) => {
                             <header>
 
                                 <Box style={{
-                                    backgroundColor: "rgba(0, 0, 0, 0.8)",
-
-                                    width: "100%",
-                                    height: "80px",
-                                }}>
+                                    backgroundColor: "rgba(0, 0, 0, 0.5)",                                          
+                                }} width="100%" height="100%" >
                                     <Grid container spacing={3}>
-                                        <Grid item xs={2}>
-                                            <Box display="flex " >
+                                        <Grid container item xs={2} alignItems="center">
+                                            <Box display="flex " alignItems="center">
                                                 <IconButton onClick={() => setopen(!open)} style={{
-                                                    marginTop: "10px"
+                                                    
                                                 }}>
                                                     <Menu ></Menu>
                                                 </IconButton>
                                                 <div style={{
-                                                    marginTop: "20px"
+                                                   
                                                 }}>
                                                     <div className={classes.search}>
 
@@ -313,36 +310,36 @@ const Main = ({ isLoggedIn }) => {
                                                 </div>
                                             </Box>
                                         </Grid>
-                                        <Grid item xs={8}>
+                                        <Grid container item xs={8} alignItems="center">
 
-                                            <Grid container spacing={0}>
-
-                                                <Grid item xs={6}>
-                                                    <div className={classes.gas}>
+                                      
+                                                <Grid item xs={4} >
+{/*                                                     <div className={classes.gas}>
                                                         <img src={mainimg_sub} style={{
 
                                                             transform: "rotate(270deg)",
                                                             objectPosition: "160px 0px"
                                                         }} ></img>
 
-                                                    </div>{menuvisible ?
+                                                    </div> */}
+                                                    {menuvisible ?
                                                         <>
                                                             <div style={{
-                                                                position: "absolute",
-                                                                right: "50%",
+                                                             /*    position: "absolute",
+                                                                right: "50%", */
                                                                 float: "left",
-                                                                marginRight: "100px",
-                                                                marginTop: "25px"
-                                                            }} id="menu1">
+                                                              /*   marginRight: "100px", */
+                                                             
+                                                            }}  id="menu1">
                                                                 <Grid container spacing={6} >
                                                                     <Grid item xs={4}>
-                                                                        <Link to='/tweet'>test1</Link>
+                                                                        <Link to='About' id="header_link">About</Link>
                                                                     </Grid>
                                                                     <Grid item xs={4}>
-                                                                        <Link to='/'>test2</Link>
+                                                                        <Link to='Study' id="header_link">Study</Link>
                                                                     </Grid>
                                                                     <Grid item xs={4}>
-                                                                        <Links color="inherit">test1</Links>
+                                                                        <Link to='Code' id="header_link">Code</Link>
                                                                     </Grid>
                                                                 </Grid>
 
@@ -351,38 +348,50 @@ const Main = ({ isLoggedIn }) => {
                                                         : null}
 
                                                 </Grid>
-                                                <Grid item xs={6}>
-                                                    <div className={classes.gas2}>
+                                                <Grid item xs={4} justify="center" style={{
+                                                    display:"flex"
+                                                }}>                                                   
+                                                    <Box textAlign="center" style={{
+                                                        width:"70%",
+                                                        height:"75%"
+                                                    }}>
+                                                        <Link to="/" className="logo">
+                                                            <div className="logo_inside anim-typewriter">Rude_Field</div>
+                                                        </Link>                                                      
+                                                    </Box>                                                            
+                                                </Grid>
+                                                <Grid item xs={4}>
+{/*                                                     <div className={classes.gas2}>
 
                                                         <img src={mainimg_sub} style={{
                                                             transform: "rotate(90deg)",
                                                             objectPosition: "-160px 0px"
                                                         }}></img>
-                                                    </div>
+                                                    </div> */}
 
-                                                    <div style={{
-                                                        position: "absolute",
-                                                        left: "50%",
+                                                    <div  style={{
+/*                                                         position: "absolute",
+                                                        left: "50%", */
                                                         float: "right",
-                                                        marginLeft: "100px",
-                                                        marginTop: "25px"
-                                                    }} id="menu1">
-                                                        <Grid container spacing={6} >
+                                                       /*  marginLeft: "100px", */
+                                                  
+                                                    }}  id="menu1">
+                                                        <Grid item container spacing={6} >
                                                             <Grid item xs={4}>
-                                                                <Links href="/" color="inherit">test1</Links>
+                                                                <Link to='/Game' id="header_link">Game</Link>
                                                             </Grid>
                                                             <Grid item xs={4}>
-                                                                <Links href="/" color="inherit">test1</Links>
+                                                                <Link to='/Music' id="header_link">Music</Link>
                                                             </Grid>
                                                             <Grid item xs={4}>
-                                                                <Links href="/" color="inherit">test1</Links>
+                                                                <Link to="/tweet" id="header_link">FreeFire</Link>
                                                             </Grid>
                                                         </Grid>
 
                                                     </div>
                                                 </Grid>
 
-                                            </Grid>
+                                  
 
                                         </Grid>
                                         <Grid item xs={2}>
@@ -395,9 +404,9 @@ const Main = ({ isLoggedIn }) => {
                                             </Box>
                                         </Grid>
                                     </Grid>
-                                    <div id="icondiv">
+{/*                                     <div id="icondiv">
                                         <img src={mainimg} height="130px" ></img>
-                                    </div>
+                                    </div> */}
 
 
                                 </Box>
